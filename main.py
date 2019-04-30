@@ -41,8 +41,7 @@ plt.ylabel('cost')
 plt.xlabel('step')
 plt.title("logistic regression'")
 
-legend = plt.legend(loc='upper center', shadow=True)
-frame = legend.get_frame()
+plt.legend(loc='upper center', shadow=True)
 
 plt.show()
 
@@ -62,7 +61,7 @@ xb1 = (xb1 - mu) / sigma
 xa2 = (xa2 - mu) / sigma
 xb2 = (xb2 - mu) / sigma
 
-plt.plot([xa1, xa2], [xb1, xb2], 'k-', lw=1, color='blue')
+plt.plot([xa1, xa2], [xb1, xb2], 'k-', lw=1, color='blue', label='old_theta')
 
 xa1 = 0
 xb1 = -(theta[0] + xa1 * theta[1]) / theta[2]
@@ -76,6 +75,7 @@ xa2 = -(theta[0] + xb2 * theta[2]) / theta[1]
 xa2 = -(xa2 - mu) / sigma - theta[0]
 xb2 = (xb2 - mu) / sigma
 
-plt.plot([xa1, xa2], [xb1, xb2], 'k-', lw=1, color='red')
+plt.plot([xa1, xa2], [xb1, xb2], 'k-', lw=1, color='red', label='theta')
+plt.legend(loc='upper center', shadow=True)
 
 plt.show()
