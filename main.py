@@ -33,8 +33,8 @@ for i in range(max_iter):
 
     his[i, :] = cost
 
-    if i % 100 == 0:
-        print (str(i) + "--" + str(cost))
+    if i % 100 == 99:
+        print ("iterate number: " + str(i + 1) + " -- cost: " + str(cost))
 
 plt.plot(his, label='cost')
 
@@ -49,8 +49,8 @@ plt.show()
 plt.scatter(X[:, 1], X[:, 2], c=y, s=50, cmap=plt.cm.Spectral)
 
 best_theta = np.array([[-25.161272],
-                      [0.206233],
-                      [0.201470]], dtype=float)
+                       [0.206233],
+                       [0.201470]], dtype=float)
 
 xa1 = 0
 xb1 = -(best_theta[0] + xa1 * best_theta[1]) / best_theta[2]
@@ -98,5 +98,5 @@ x = np.array([
 predicted1 = np.array(predict(x, best_theta, 0, 1) > .5, dtype=int)
 predicted2 = np.array(predict(x, theta, mu, sigma) > .5, dtype=int)
 
-print("predicted value  with best_theta = " + str(predicted1))
-print("predicted value  with theta = " + str(predicted2))
+print("predicted value with best_theta = " + str(predicted1))
+print("predicted value with theta = " + str(predicted2))
