@@ -5,7 +5,7 @@ from utils import load_dataset, add_x0, feature_normalize
 import numpy as np
 import matplotlib.pyplot as plt
 
-data = load_dataset()
+data = load_dataset("data.txt")
 
 X_Original = data[:, 0:2]
 y = data[:, 2:3]
@@ -21,7 +21,7 @@ m = X.shape[0]
 n = X.shape[1]
 learning_rate = .3
 theta = np.zeros((n, 1))
-max_iter = 800
+max_iter = 400
 
 his = np.zeros((max_iter, 1))
 
@@ -70,7 +70,7 @@ xb1 = -(theta[0] + xa1 * theta[1]) / theta[2]
 xb2 = -3
 xa2 = -(theta[0] + xb2 * theta[2]) / theta[1]
 
-plt.plot([xa1, xa2], [xb1, xb2], 'k-', lw=1, color='red', label='theta')
+plt.plot([xa1, xa2], [xb1, xb2], 'k-', lw=1, color='red', label='my_theta')
 plt.legend(loc='upper center', shadow=True)
 
 plt.show()
