@@ -1,9 +1,10 @@
 from compute_cost import compute_cost
 from gradient_descent import gradient_descent
 from predict import predict
-from utils import load_dataset, add_x0, feature_normalize, load_dataset2
+from utils import load_dataset, add_x0, feature_normalize
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d
 
 data = load_dataset("data2.txt")
 
@@ -21,7 +22,7 @@ m = X.shape[0]
 n = X.shape[1]
 learning_rate = .3
 theta = np.zeros((n, 1))
-max_iter = 8000
+max_iter = 800
 
 his = np.zeros((max_iter, 1))
 
@@ -46,9 +47,6 @@ plt.legend(loc='upper center', shadow=True)
 
 plt.show()
 
-
-
-
 plt.scatter(X[:, 1], X[:, 2], c=y, s=50, cmap=plt.cm.Spectral)
 xa1 = -2
 xc1 = 0
@@ -60,23 +58,16 @@ plt.plot([xa1, xa2], [xb1, xb2], 'k-', lw=1, color='red', label='my_theta')
 plt.legend(loc='upper center', shadow=True)
 plt.show()
 
-
-
-
 plt.scatter(X[:, 1], X[:, 3], c=y, s=50, cmap=plt.cm.Spectral)
 xa1 = -2
 xb1 = 0
 xc1 = -(theta[0] + xa1 * theta[1] + xb1 * theta[2]) / theta[3]
-
 xc2 = -2
 xb2 = 0
 xa2 = -(theta[0] + xb2 * theta[2] + xc2 * theta[3]) / theta[1]
 plt.plot([xa1, xa2], [xc1, xc2], 'k-', lw=1, color='red', label='my_theta')
 plt.legend(loc='upper center', shadow=True)
 plt.show()
-
-
-
 
 plt.scatter(X[:, 2], X[:, 3], c=y, s=50, cmap=plt.cm.Spectral)
 xa1 = 0
@@ -92,3 +83,38 @@ plt.show()
 
 
 
+
+
+
+ax = plt.axes(projection='3d')
+xa1 = -2.5
+xc1 = 0
+xb1 = -(theta[0] + xa1 * theta[1] + xc1 * theta[3]) / theta[2]
+xb2 = -2.5
+xc2 = 0
+xa2 = -(theta[0] + xb2 * theta[2] + xc2 * theta[3]) / theta[1]
+ax.plot3D([xa1,xa2], [xb1,xb2], [xc1,xc2], 'red')
+
+
+
+
+
+xa1 = -2.5
+xb1 = 0
+xc1 = -(theta[0] + xa1 * theta[1] + xb1 * theta[2]) / theta[3]
+xc2 = -2.5
+xb2 = 0
+xa2 = -(theta[0] + xb2 * theta[2] + xc2 * theta[3]) / theta[1]
+ax.plot3D([xa1,xa2], [xc1,xc2], [xb1,xb2], 'gray')
+
+xa1 = 0
+xc1 = -2.5
+xb1 = -(theta[0] + xa1 * theta[1] + xc1 * theta[3]) / theta[2]
+xb2 = -2.5
+xa2 = 0
+xc2 = -(theta[0] + xb2 * theta[2] + xa2 * theta[1]) / theta[3]
+ax.plot3D([xa1,xa2], [xb1,xb2], [xc1,xc2], 'green')
+
+
+ax.scatter3D(X[:, 1], X[:, 2], X[:, 3], c=y, cmap='Greens')
+plt.show()
