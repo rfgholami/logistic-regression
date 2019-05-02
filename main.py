@@ -57,10 +57,10 @@ xb1 = -(best_theta[0] + xa1 * best_theta[1]) / best_theta[2]
 xb2 = 0
 xa2 = -(best_theta[0] + xb2 * best_theta[2]) / best_theta[1]
 
-xa1 = (xa1 - mu) / sigma
-xb1 = (xb1 - mu) / sigma
-xa2 = (xa2 - mu) / sigma
-xb2 = (xb2 - mu) / sigma
+xa1 = (xa1 - mu[0]) / sigma[0]
+xb1 = (xb1 - mu[1]) / sigma[1]
+xa2 = (xa2 - mu[0]) / sigma[0]
+xb2 = (xb2 - mu[1]) / sigma[1]
 
 plt.plot([xa1, xa2], [xb1, xb2], 'k-', lw=1, color='blue', label='best_theta')
 
