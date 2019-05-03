@@ -2,8 +2,8 @@ from compute_cost import compute_cost
 from gradient_descent import gradient_descent
 from predict import predict
 from sigmoid import sigmoid
-from utils import load_dataset, add_x0, feature_normalize, get_arange, add_polynomial_feature_n3, \
-    add_polynomial_feature_n2, add_polynomial_feature, multiply_feature, remove_out_of_bound_values
+from utils import load_dataset, add_x0, feature_normalize, get_arange,  \
+     add_polynomial_feature, multiply_feature, remove_out_of_bound_values
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
