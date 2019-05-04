@@ -47,7 +47,7 @@ m = X.shape[0]
 n = X.shape[1]
 learning_rate = .01
 theta = np.zeros((n, 1))
-max_iter = 300000
+max_iter = 30000
 
 his = np.zeros((max_iter, 1))
 
