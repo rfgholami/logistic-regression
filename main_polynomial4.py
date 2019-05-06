@@ -15,15 +15,17 @@ y = data[:, 2:3]
 
 plt.scatter(X_Original[:, 0], X_Original[:, 1], c=y, s=50, cmap=plt.cm.Spectral)
 
+X_Original = add_polynomial_feature(X_Original, np.array([0, 0, 0,0,0]))
+X_Original = add_polynomial_feature(X_Original, np.array([0, 0, 0,0]))
 X_Original = add_polynomial_feature(X_Original, np.array([0, 0, 0]))
-X_Original = add_polynomial_feature(X_Original, np.array([1, 1, 1]))
-
-X_Original = add_polynomial_feature(X_Original, np.array([0, 1, 1]))
-X_Original = add_polynomial_feature(X_Original, np.array([0, 0, 1]))
-
+# X_Original = add_polynomial_feature(X_Original, np.array([1, 1, 1]))
+#
+# X_Original = add_polynomial_feature(X_Original, np.array([0, 1, 1]))
+# X_Original = add_polynomial_feature(X_Original, np.array([0, 0, 1]))
+#
 X_Original = add_polynomial_feature(X_Original, np.array([0, 0]))
-X_Original = add_polynomial_feature(X_Original, np.array([0, 1]))
-X_Original = add_polynomial_feature(X_Original, np.array([1, 1]))
+# X_Original = add_polynomial_feature(X_Original, np.array([0, 1]))
+# X_Original = add_polynomial_feature(X_Original, np.array([1, 1]))
 
 X, mu, sigma = feature_normalize(X_Original)
 
@@ -34,7 +36,7 @@ m = X.shape[0]
 n = X.shape[1]
 learning_rate = .9
 theta = np.zeros((n, 1))
-max_iter = 140000
+max_iter = 500000
 
 his = np.zeros((max_iter, 1))
 
@@ -66,13 +68,12 @@ yhat = np.zeros((m, m))
 
 for i in range(xa.shape[0]):
     yhat[i, :] = theta[0] + theta[1] * xa[i] + theta[2] * xb \
-                 + theta[3] * np.multiply(np.multiply(xa[i], xa[i]), xa[i]) \
-                 + theta[4] * np.multiply(np.multiply(xb, xb), xb) \
-                 + theta[5] * np.multiply(np.multiply(xa[i], xb), xb) \
-                 + theta[6] * np.multiply(np.multiply(xa[i], xa[i]), xb) \
-                 + theta[7] * np.multiply(xa[i], xa[i]) \
-                 + theta[8] * np.multiply(xa[i], xb) \
-                 + theta[9] * np.multiply(xb, xb)
+                 + theta[3] * np.multiply(np.multiply(xa[i], xa[i]), np.multiply(xa[i], np.multiply(xa[i], xa[i]))) \
+                 + theta[4] * np.multiply(np.multiply(xa[i], xa[i]), np.multiply(xa[i], xa[i])) \
+                 + theta[5] * np.multiply(np.multiply(xa[i], xa[i]), xa[i]) \
+                 + theta[6] * np.multiply(xa[i], xa[i]) \
+                 # + theta[8] * np.multiply(xa[i], xb) \
+                 # + theta[9] * np.multiply(xb, xb)
 
 # yhat = sigmoid(yhat)
 # yhat = yhat > .5
@@ -85,17 +86,17 @@ for i in range(xa.shape[0]):
     xaRow = np.ones(xa.shape) * xa[i]
 
     yhat = theta[0] + theta[1] * xaRow + theta[2] * xb \
-           + theta[3] * np.multiply(np.multiply(xaRow, xaRow), xaRow) \
-           + theta[4] * np.multiply(np.multiply(xb, xb), xb) \
-           + theta[5] * np.multiply(np.multiply(xaRow, xb), xb) \
-           + theta[6] * np.multiply(np.multiply(xaRow, xaRow), xb) \
-           + theta[7] * np.multiply(xaRow, xaRow) \
-           + theta[8] * np.multiply(xaRow, xb) \
-           + theta[9] * np.multiply(xb, xb)
+           + theta[3] * np.multiply(np.multiply(xaRow, xaRow), np.multiply(xaRow, np.multiply(xaRow, xaRow))) \
+           + theta[4] * np.multiply(np.multiply(xaRow, xaRow), np.multiply(xaRow, xaRow)) \
+           + theta[5] * np.multiply(np.multiply(xaRow, xaRow), xaRow) \
+           + theta[6] * np.multiply(xaRow, xaRow) \
+           # + theta[8] * np.multiply(xaRow, xb) \
+           # + theta[9] * np.multiply(xb, xb)
 
     yhat = sigmoid(yhat)
     yhat = yhat > .5
 
+    # if i%1==0 and i>30:
     plt.scatter(xaRow, xb, c=yhat, s=50, cmap=plt.cm.Spectral)
 
 plt.scatter(X[:, 1], X[:, 2], c=y, s=50, edgecolors='green', cmap=plt.cm.Spectral)
